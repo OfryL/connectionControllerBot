@@ -1,0 +1,29 @@
+{
+  "name": "connectioncontrollerbot",
+  "version": "1.0.0",
+  "description": "connectionControllerBot manage and monitor unix network interface",
+  "main": "src/app.js",
+  "scripts": {
+    "test": "src/tests.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/OfryL/connectionControllerBot.git"
+  },
+  "keywords": [
+    "telegram",
+    "api",
+    "bot",
+    "network",
+    "unix",
+    "manage",
+    "monitor",
+    "connection"
+  ],
+  "author": "Ofry Linkovsky (ofryli at gmail)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/OfryL/connectionControllerBot/issues"
+  },
+  "homepage": "https://github.com/OfryL/connectionControllerBot#readme"
+}
