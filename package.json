@@ -4,7 +4,8 @@
   "description": "connectionControllerBot manage and monitor unix network interface",
   "main": "src/app.js",
   "scripts": {
-    "test": "src/tests.js"
+    "start": "node src/app.js",
+    "test": "node src/tests.js"
   },
   "repository": {
     "type": "git",
@@ -25,5 +26,14 @@
   "bugs": {
     "url": "https://github.com/OfryL/connectionControllerBot/issues"
   },
-  "homepage": "https://github.com/OfryL/connectionControllerBot#readme"
+  "homepage": "https://github.com/OfryL/connectionControllerBot#readme",
+  "dependencies": {
+    "debug": "^4.1.1",
+    "ifconfig": "0.0.1",
+    "node-cron": "^2.0.3",
+    "request": "^2.88.0"
+  },
+  "devDependencies": {
+    "nodemon": "^1.19.3"
+  }
 }
