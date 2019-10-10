@@ -38,6 +38,11 @@ const setInterface = async function (state) {
     await execCmd(`ifconfig ${ethName} ${state}`);
 };
 
+const resetSystem = async function () {
+    logger.warn('execute system reboot');
+    await execCmd('reboot');
+};
+
 const resetInterface = async function () {
     logger.log('restarting interface name %s', ethName);
     await setInterface('down');
@@ -69,5 +74,6 @@ module.exports = {
     checkConnectionViaHttpRequest,
     setInterface,
     resetInterface,
-    getInterfaces
+    getInterfaces,
+    resetSystem
 };

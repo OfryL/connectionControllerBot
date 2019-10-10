@@ -7,6 +7,7 @@ const util = require('../connectionUtil/connectionUtil');
 //todo config
 const cornExpression = '0 * * * *';  // check every 1h
 const retries = 5;
+const panicRestart = true;
 
 module.exports = function() {
     'use strict';
@@ -26,6 +27,10 @@ module.exports = function() {
                 debug('connection is OK!');
                 break;
             }
+        }
+        if(panicRestart && tries == retries) {
+            logger.warn('max tries reached, rebooting system...');
+            util.resetSystem();
         }
     };
 
