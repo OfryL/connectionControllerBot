@@ -49,7 +49,11 @@ const setInterface = async function (state) {
 
 const resetSystem = async function () {
     logger.warn('execute system reboot');
-    await execCmd('reboot');
+    if(isWindows) {
+        await execCmd('shutdown -r -t 0');
+    } else {
+        await execCmd('reboot');
+    }
 };
 
 const sleep = async function(time) {
