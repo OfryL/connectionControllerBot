@@ -8,6 +8,7 @@ const exec = require('child_process').exec;
 //todo move to config
 const ethName = 'en0';
 const remoteUrl = 'https://www.google.com/';
+const isWindows = true;
 
 const getInterfaces = function () {
     return new Promise(function (resolve, reject) {
@@ -35,7 +36,15 @@ const execCmd = function (term) {
 };
 
 const setInterface = async function (state) {
-    await execCmd(`ifconfig ${ethName} ${state}`);
+    if(isWindows) {
+        if (state == 'down') {
+            await execCmd(`netsh interface set interface "${ethName}" disable`);
+        } else {
+            await execCmd(`netsh interface set interface "${ethName}" enable`);
+        }
+    } else {
+        await execCmd(`ifconfig ${ethName} ${state}`);
+    }
 };
 
 const resetSystem = async function () {
@@ -43,12 +52,20 @@ const resetSystem = async function () {
     await execCmd('reboot');
 };
 
+const sleep = async function(time) {
+    if(isWindows) {
+        await execCmd('timeout ' + time);
+    } else {
+        await execCmd('sleep ' + time);
+    }
+};
+
 const resetInterface = async function () {
     logger.log('restarting interface name %s', ethName);
     await setInterface('down');
-    await execCmd('sleep 5');
+    await sleep(5);
     await setInterface('up');
-    await execCmd('sleep 5');
+    await sleep(5);
 };
 
 const checkConnectionViaHttpRequest = function () {
