@@ -1,6 +1,4 @@
-const namespace = 'app';
-const logger = require('./logger')(namespace);
-const debug = require('util').debuglog(namespace);
+const logger = require('./logger')('app');
 require('./keepAliveJob/keepAliveJob');
 
-logger.log('connectionController started');
+logger.debug('connectionController started');

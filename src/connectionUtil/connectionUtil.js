@@ -1,6 +1,4 @@
-const namespace = 'connectionUtil';
-const logger = require('../logger')(namespace);
-const debug = require('util').debuglog(namespace);
+const logger = require('../logger')('app.connectionUtil');
 const request = require('request');
 const ifconfig = require('ifconfig');
 const exec = require('child_process').exec;
@@ -58,7 +56,7 @@ const resetSystem = async function () {
 
 const sleep = async function(time) {
     if(isWindows) {
-        await execCmd('timeout ' + time);
+        await execCmd('ping 127.0.0.1 -n ' + time);
     } else {
         await execCmd('sleep ' + time);
     }
@@ -74,7 +72,7 @@ const resetInterface = async function () {
 
 const checkConnectionViaHttpRequest = function () {
     return new Promise(function (resolve, reject) {
-    debug('check connection via http request started');
+    logger.debug('check connection via http request started');
         request(remoteUrl, function (error, response, body) {
             if (error) {
                 logger.warn(`error requesting ${remoteUrl} - ${error}`);

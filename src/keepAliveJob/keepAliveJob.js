@@ -1,6 +1,4 @@
-const namespace = 'keepAliveJob';
-const logger = require('../logger')(namespace);
-const debug = require('util').debuglog(namespace);
+const logger = require('../logger')('app.keepAliveJob');
 const cron = require('node-cron');
 const util = require('../connectionUtil/connectionUtil');
 
@@ -24,7 +22,7 @@ module.exports = function() {
                 logger.log('connection was reset');
                 tries++;
             } else {
-                debug('connection is OK!');
+                logger.debug('connection is OK!');
                 break;
             }
         }
@@ -40,7 +38,7 @@ module.exports = function() {
             logger.error('corn job expression is wrong!');
         }
         cron.schedule(cornExpression, () => {
-            debug('executing corn job');
+            logger.debug('executing corn job');
             jobRunner();
         });
         status = true;
